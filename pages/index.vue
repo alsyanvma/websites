@@ -1,133 +1,93 @@
 <template>
-  <div class="container-fluid">
-    <div class="row my-5">
-      <div class="col-lg-6">
-        <nuxt-link to="../pengunjung/tambah">
-          <div class="card bg-pengunjung rounded-5">
-            <div class="card-body">
-              <h2>pengunjung</h2>
-            </div>
-          </div>
-        </nuxt-link>
-      </div>
-
-      <div class="col-lg-6">
-        <nuxt-link to="../buku">
-          <div class="card bg-buku rounded-5">
-            <div class="card-body">
-              <h2>Cari Buku</h2>
-            </div>
-          </div>
-        </nuxt-link>
-      </div>
-    </div>
-
-    <div class="mt-5" style="margin-left: 150px">
-      <h2 class="">STATISTIK</h2>
-    </div>
-    <div class="row my-5 justify-content-around">
-      <div class="col-lg-6">
-        <div class="card bg-pengunjung1 rounded-5">
-          <div class="card-body">
-            <nuxt-link to="/pengunjung">
-              <div class="row">
-                <div class="col p-5">
-                  <div class="col p-3" style="font-size: 80px">{{ jumlahp }}</div>
-                </div>
-                <div class="col mt-5 p-5"><h2 style="font-family: margin-left -20px">Pengunjung</h2></div>
-              </div>
-            </nuxt-link>
+    <div class="container-fluid">
+      <div class="row my-5">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+          <div class="card bg-foto rounded-5">
+            <div class="card-body"></div>
           </div>
         </div>
       </div>
-
-      <div class="col-lg-6">
-        <div class="card bg-buku2 rounded-5">
-          <div class="card-body">
-            <nuxt-link to="./buku">
-              <div class="row">
-                <div class="col p-5">
-                  <h1 style="font-size: 80px; margin-right: 200px">{{ jumlahb }}</h1>
-                </div>
-                <div class="col mt-5 p-5"><h2 style="font-family: margin-left 20px">Buku</h2></div>
-              </div>
-            </nuxt-link>
-          </div>
+  
+      
+      <div class="image-text-wrapper">
+        <div class="image-box">
+          <picture>
+            <img 
+              src="assets/img/bapak.png" 
+              alt="logo SMKN 4" 
+              class="img-fluid logo-image" 
+              width="200" 
+              height="200">
+          </picture>
+        </div>
+  
+        <div class="text-container">
+          <h1>Sambutan Kepala Sekolah</h1>
+          <h2>
+            Assalamualaikum Warahmatullahi Wabarakatuh<br><br>
+            Selamat datang di SMKN 4 Tasikmalaya. Segala puji dan syukur kita panjatkan kehadirat Allah SWT, semoga kita semua ada dalam lindungan-Nya. Dan atas perkenan-Nya pula kami dapat menghadirkan website SMK Negeri 4 Tasikmalaya ini. Kami berharap dengan adanya website di SMK Negeri 4 Tasikmalaya ini para pengunjung dapat mengenal lebih jauh tentang sekolah kami sehingga dapat mempererat tali silaturrahmi antara sekolah dengan masyarakat demi kemajuan kita bersama. Tiada gading yang tak retak, website kami ini masih dalam proses pengembangan, masih banyak kekurangan yang harus kami perbaiki. Kritik dan sarannya yang membangun sangat kami harapkan untuk pengembangan ke depan.<br><br>
+            Akhirnya, saya mengucapkan terimakasih yang sebesar-besarnya kepada semua pihak yang tidak dapat disebutkan satu persatu atas segala bantuan dan fasilitas yang telah diberikan. Semoga semua yang kita lakukan bermanfaat bagi masyarakat.<br><br>
+            Wassalamu'alaikum Warahmatullahi Wabarakatuh.
+          </h2>
         </div>
       </div>
     </div>
-    <Chart />
-  </div>
-</template>
-
-<script setup>
-useHead({ title: "perpus digital ainy", meta: [{ name: "description", content: "aplikasi kunjungan dan pencarian buku perpus SMKN 4 TASIKMALAYA" }] });
-const supabase = useSupabaseClient();
-const jumlahp = ref(0);
-const jumlahb = ref(0);
-
-async function ambiljumlahp() {
-  const { data, error, count } = await supabase.from("pengunjung").select("*", { count: "exact" });
-  if (count) jumlahp.value = count;
-}
-
-async function ambiljumlahb() {
-  const { data, error, count } = await supabase.from("buku").select("*", { count: "exact" });
-  if (count) jumlahb.value = count;
-}
-
-onMounted(() => {
-  ambiljumlahp();
-  ambiljumlahb();
-});
-</script>
-
-<style scoped>
-.card {
-  height: 250px;
-  box-shadow: 1px 1px 10px;
-}
-.card.bg-pengunjung {
-  margin-right: 13%;
-  margin-left: 13%;
-  background-image: url("../assets/img/bg-home-kunjungan.webp");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  color: black;
-  opacity: 70%;
-}
-
-.card.bg-buku {
-  margin-right: 13%;
-  margin-left: 13%;
-  background: url("../assets/img/bg-home-cari-buku.webp") no-repeat center center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  color: black;
-  opacity: 70%;
-}
-
-.card.bg-pengunjung1 {
-  margin-right: 13%;
-  margin-left: 13%;
-  margin-top: 2%;
-  background-color: #ece183;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 70%;
-}
-.card.bg-buku2 {
-  margin-right: 13%;
-  margin-left: 13%;
-  margin-top: 2%;
-  background-color: #77f6aa;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  opacity: 70%;
-}
-</style>
+  </template>
+  
+  <style scoped>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .card {
+    height: 400px;
+    box-shadow: none;
+    width: 100vw;
+    max-width: none;
+  }
+  
+  .card.bg-foto {
+    background-image: url('../assets/img/kita.png');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+  
+  h1, h2 {
+    margin: 20px;
+    padding: 0;
+  }
+  
+  h1 {
+    font-size: 24px;
+    text-align: left;
+    margin-top: 10px;
+  }
+  
+  h2 {
+    font-size: 16px;
+    text-align: left;
+    margin-top: 10px;
+  }
+  
+  .image-text-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .image-box {
+    display: inline-block;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 210px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    margin-right: 20px;
+  }
+  
+  .text-container {
+    max-width: 600px;
+  }
+  </style>
+  
